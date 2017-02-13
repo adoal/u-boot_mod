@@ -46,6 +46,7 @@ const spi_nor_ids_info_t spi_nor_ids[] = {
 	{ "N25Q128",   0x20BA18, SIZE_16MiB, SIZE_64KiB, 256, SPI_FLASH_CMD_ES_64KB },
 	{ "S25FL127S", 0x012018, SIZE_16MiB, SIZE_64KiB, 256, SPI_FLASH_CMD_ES_64KB },
 	{ "W25Q128",   0xEF4018, SIZE_16MiB, SIZE_64KiB, 256, SPI_FLASH_CMD_ES_64KB },
+	{ "W25Q128FW", 0xEF6018, SIZE_16MiB, SIZE_64KiB, 256, SPI_FLASH_CMD_ES_64KB },
 };
 
 const u32 spi_nor_ids_count = sizeof(spi_nor_ids) / sizeof(spi_nor_ids_info_t);
@@ -150,28 +151,28 @@ void flash_perror(int err)
 	case ERR_OK:
 		break;
 	case ERR_TIMOUT:
-		puts("## Error: timeout writing to FLASH\n");
+		printf_err("timeout writing to FLASH\n");
 		break;
 	case ERR_NOT_ERASED:
-		puts("## Error: FLASH not erased\n");
+		printf_err("FLASH not erased\n");
 		break;
 	case ERR_INVAL:
-		puts("## Error: outside available FLASH\n");
+		printf_err("outside available FLASH\n");
 		break;
 	case ERR_ALIGN:
-		puts("## Error: start and/or end address not on sector boundary\n");
+		printf_err("start and/or end address not on sector boundary\n");
 		break;
 	case ERR_UNKNOWN_FLASH_VENDOR:
-		puts("## Error: unknown vendor of FLASH\n");
+		printf_err("unknown vendor of FLASH\n");
 		break;
 	case ERR_UNKNOWN_FLASH_TYPE:
-		puts("## Error: unknown type of FLASH\n");
+		printf_err("unknown type of FLASH\n");
 		break;
 	case ERR_PROG_ERROR:
-		puts("## Error: general FLASH programming error\n");
+		printf_err("general FLASH programming error\n");
 		break;
 	default:
-		printf("## Error: %s[%d] FIXME: rc=%d\n", __FILE__, __LINE__, err);
+		printf_err("%s[%d] FIXME: rc=%d\n", __FILE__, __LINE__, err);
 		break;
 	}
 }
